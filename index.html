@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(45deg,rgb(235, 179, 179),rgb(188, 228, 253));
+        }
+        h1{
+            text-align: center;
+        }
+        form {
+            border: 2px solid aquamarine;
+            padding:10px 20px;
+            border-radius: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input{
+            width: 97%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input:focus{
+            background-color: rgb(198, 247, 247);
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .prediction{
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .plot{
+            display: block;
+            margin: 20px;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Hierarchical Clustering - Enter Car Details</h1>
+    <form action="/submit" method="post">
+        
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="number" placeholder="YYYY" min="1992" max="2024" name="year" id="year" required>
+            
+        </div>
+
+        <div class="form-group">
+            <label for="selling_price">Selling Price:</label>
+            <input type="number" id="selling_price" name="selling_price" placeholder="Enter selling price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="km_driven">Kilometers Driven:</label>
+            <input type="number" id="km_driven" name="km_driven" placeholder="Enter kilometers driven" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fuel">Fuel Type:</label>
+            <select id="fuel" name="fuel" required>
+                <option value="">-- Select Fuel Type --</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="LPG">CNG</option>
+                <option value="LPG">LPG</option>
+                <option value="Petrol">Petrol</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="seller_type">Seller Type:</label>
+            <select id="seller_type" name="seller_type" required>
+                <option value="">-- Select Owner --</option>
+                <option value="Dealer">Dealer</option>
+                <option value="Individual">Individual</option>
+                <option value="Trustmark Dealer">Trustmark Dealer</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="transmission">Transmission:</label>
+            <select id="transmission" name="transmission" required>
+                <option value="">-- Select Transmission --</option>
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="owner">Owner:</label>
+            <select id="owner" name="owner" required>
+                <option value="">-- Select Owner Type --</option>
+                <option value="First Owner">First Owner</option>
+                <option value="Second Owner">Second Owner</option>
+                <option value="Third Owner">Third Owner</option>
+                <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+                <option value="Test Drive Car">Test Drive Car</option>
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+
+       
+        {% if cluster is not none %}
+            <div class="prediction" >
+                Cluster: {{ cluster }} 
+            </div>
+        {% endif %}
+    </form>
+    <div>
+        <img class="plot" src="{{ url_for('static', filename='plot.png') }}" height="300px" width="500px" />
+    </div>
+</body>
+</html>
